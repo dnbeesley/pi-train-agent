@@ -6,9 +6,9 @@
 	<artifactId>pi-train-agent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<parent>
-		<groupId>com.pi4j</groupId>
-		<artifactId>pi4j-parent</artifactId>
-		<version>1.2</version>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.0.RELEASE</version>
 	</parent>
 
 	<properties>
@@ -19,11 +19,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.10.3</version>
-		</dependency>
-		<dependency>
 			<groupId>com.pi4j</groupId>
 			<artifactId>pi4j-core</artifactId>
 			<version>1.2</version>
@@ -31,7 +26,6 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.5.12</version>
 		</dependency>
 		<dependency>
 			<groupId>org.beesley.pitrain</groupId>
@@ -41,18 +35,15 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-websocket</artifactId>
-			<version>2.3.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
-			<version>2.3.0.RELEASE</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
-			<version>2.2.6.RELEASE</version>
 		</dependency>
 	</dependencies>
 

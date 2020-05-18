@@ -5,7 +5,7 @@ import org.beesley.pitrain.agent.controllers.BaseController;
 import org.junit.jupiter.api.Test;
 import com.pi4j.io.gpio.Pin;
 
-public class RaspiControllerTests extends BaseController {
+public class BaseControllerTests extends BaseController {
   @Test
   public void testParsePin() {
     for (byte i = 0; i <= 20; i++) {
