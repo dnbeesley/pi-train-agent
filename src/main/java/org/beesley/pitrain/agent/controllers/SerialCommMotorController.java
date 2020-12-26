@@ -15,7 +15,7 @@ public class SerialCommMotorController implements MotorController {
   }
 
   @Override
-  public synchronized void setState(MotorControl motorControl) throws IOException {
+  public synchronized void setState(final MotorControl motorControl) throws IOException {
     logger.info("ID:" + motorControl.getId());
     logger.info("Speed: " + motorControl.getSpeed());
     logger.info("Reversed: " + motorControl.isReversed());
@@ -25,8 +25,8 @@ public class SerialCommMotorController implements MotorController {
       value0 += 0x04;
     }
 
-    byte value1 = (byte) (motorControl.getSpeed() % ((byte) 0x40));
-    byte[] output = new byte[] {0x01, motorControl.getChannel(), value0, value1, (byte) 0xFF};
+    final byte value1 = (byte) (motorControl.getSpeed() % ((byte) 0x40));
+    final byte[] output = new byte[] {0x01, motorControl.getChannel(), value0, value1, (byte) 0xFF};
     logger.debug("Writing {} to serial port.", output);
     this.serialPort.writeBytes(output, output.length);
     while (this.serialPort.bytesAwaitingWrite() > 0) {

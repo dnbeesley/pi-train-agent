@@ -4,5 +4,5 @@ import java.io.IOException;
 import org.beesley.pitrain.models.MotorControl;
 
 public interface MotorController {
-  void setState(MotorControl motorControl) throws IOException;
+  void setState(final MotorControl motorControl) throws IOException;
 }

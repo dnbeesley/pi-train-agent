@@ -19,13 +19,14 @@ public class PiTrainStompSessionHandler extends StompSessionHandlerAdapter {
   private final MotorController motorController;
   private final TurnOutController turnOutController;
 
-  public PiTrainStompSessionHandler(MotorController motorController, TurnOutController turnOutController) {
+  public PiTrainStompSessionHandler(final MotorController motorController,
+      final TurnOutController turnOutController) {
     this.motorController = motorController;
     this.turnOutController = turnOutController;
   }
 
   @Override
-  public Type getPayloadType(StompHeaders headers) {
+  public Type getPayloadType(final StompHeaders headers) {
     if (headers.getDestination().equals("/topic/motor-control")) {
       return MotorControl.class;
     } else if (headers.getDestination().equals("/topic/turn-out")) {
@@ -36,7 +37,7 @@ public class PiTrainStompSessionHandler extends StompSessionHandlerAdapter {
   }
 
   @Override
-  public void handleFrame(StompHeaders headers, Object payload) {
+  public void handleFrame(final StompHeaders headers, final Object payload) {
     if (payload instanceof MotorControl) {
       try {
         this.motorController.setState((MotorControl) payload);
@@ -46,7 +47,7 @@ public class PiTrainStompSessionHandler extends StompSessionHandlerAdapter {
     } else if (payload instanceof TurnOut) {
       try {
         this.turnOutController.setState((TurnOut) payload);
-      } catch (IOException e) {
+      } catch (final IOException e) {
         logger.error("Error sending command to controller.", e);
       }
     } else {
@@ -55,14 +56,14 @@ public class PiTrainStompSessionHandler extends StompSessionHandlerAdapter {
   }
 
   @Override
-  public void afterConnected(StompSession session, StompHeaders connectedHeaders) {
+  public void afterConnected(final StompSession session, final StompHeaders connectedHeaders) {
     session.subscribe("/topic/motor-control", this);
     session.subscribe("/topic/turn-out", this);
   }
 
   @Override
-  public void handleException(StompSession session, StompCommand command, StompHeaders headers,
-      byte[] payload, Throwable exception) {
+  public void handleException(final StompSession session, final StompCommand command,
+      final StompHeaders headers, byte[] payload, Throwable exception) {
     logger.error("Error in handling webscokets", exception);
   }
 }

@@ -10,17 +10,16 @@ public class SerialCommTurnOutController implements TurnOutController {
   private static final Logger logger = LoggerFactory.getLogger(SerialCommTurnOutController.class);
   private final SerialPort serialPort;
 
-  public SerialCommTurnOutController(SerialPort serialPort) {
+  public SerialCommTurnOutController(final SerialPort serialPort) {
     this.serialPort = serialPort;
   }
 
   @Override
-  public void setState(TurnOut turnOut) throws IOException {
-    byte[] output = new byte[] {0x02, turnOut.isTurnedOut()? turnOut.getTurnOutPin() : turnOut.getForwardPin(), (byte) 0xFF};
+  public void setState(final TurnOut turnOut) throws IOException {
+    final byte[] output = new byte[] {0x02, turnOut.isTurnedOut()? turnOut.getTurnOutPin() : turnOut.getForwardPin(), (byte) 0xFF};
     logger.debug("Writing {} to serial port.", output);
     this.serialPort.writeBytes(output, output.length);
     while (this.serialPort.bytesAwaitingWrite() > 0) {
     }
   }
-
 }
